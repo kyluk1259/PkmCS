@@ -17,9 +17,9 @@ import javax.imageio.ImageIO;
  */
 public class Sprite {
 
-    private BufferedImage PLAYERSHEET = null;
-    private BufferedImage[][] playerArray;
-    private final int SIZE = 40;
+    private BufferedImage SPRITESHEET = null;
+    private BufferedImage[][] spriteArray;
+    private final int SIZE = 38;
     public int w;
     public int h;
     private int wSprite;
@@ -30,11 +30,11 @@ public class Sprite {
         h = SIZE;
 
         System.out.println("Loading: " + fileName + "...");
-        PLAYERSHEET = loadSprite(fileName);
+        SPRITESHEET = loadSprite(fileName);
 
-        wSprite = PLAYERSHEET.getWidth() / w;
-        hSprite = PLAYERSHEET.getHeight() / h;
-        loadPlayerArray();
+        wSprite = SPRITESHEET.getWidth() / w;
+        hSprite = SPRITESHEET.getHeight() / h;
+        loadSpriteArray();
     }
 
     public Sprite(String fileName, int w, int h) {
@@ -42,11 +42,11 @@ public class Sprite {
         this.h = h;
 
         System.out.println("Loading: " + fileName + "...");
-        PLAYERSHEET = loadSprite(fileName);
+        SPRITESHEET = loadSprite(fileName);
 
-        wSprite = PLAYERSHEET.getWidth() / w;
-        hSprite = PLAYERSHEET.getHeight() / h;
-        loadPlayerArray();
+        wSprite = SPRITESHEET.getWidth() / w;
+        hSprite = SPRITESHEET.getHeight() / h;
+        loadSpriteArray();
     }
 
     public void setSize(int width, int height) {
@@ -56,12 +56,12 @@ public class Sprite {
 
     public void setWidth(int i) {
         w = i;
-        wSprite = PLAYERSHEET.getWidth() / w;
+        wSprite = SPRITESHEET.getWidth() / w;
     }
 
     public void setHeight(int i) {
         h = i;
-        hSprite = PLAYERSHEET.getWidth() / w;
+        hSprite = SPRITESHEET.getHeight() / h;
     }
 
     public int getWidth() {
@@ -83,30 +83,30 @@ public class Sprite {
         return sprite;
     }
 
-    public void loadPlayerArray() {
-        playerArray = new BufferedImage[wSprite][hSprite];
+    public void loadSpriteArray() {
+        spriteArray = new BufferedImage[hSprite][wSprite];
 
-        for (int x = 0; x < wSprite; x++) {
-            for (int y = 0; y < hSprite; y++) {
-                playerArray[x][y] = getSprite(x, y);
+        for (int y = 0; y < hSprite; y++) {
+            for (int x = 0; x < wSprite; x++) {
+                spriteArray[y][x] = getSprite(x, y);
             }
         }
     }
 
     public BufferedImage getSpriteSheet() {
-        return PLAYERSHEET;
+        return SPRITESHEET;
     }
 
     public BufferedImage getSprite(int x, int y) {
-        return PLAYERSHEET.getSubimage(x * w, y * h, w, h);
+        return SPRITESHEET.getSubimage(x * w, y * h, w, h);
     }
 
     public BufferedImage[] getMainSpriteArray(int i) {
-        return playerArray[i];
+        return spriteArray[i];
     }
 
-    public BufferedImage[][] getSubSpriteArray(int i) {
-        return playerArray;
+    public BufferedImage[][] getSubSpriteArray() {
+        return spriteArray;
     }
 
     public static void drawArray(Graphics2D g, ArrayList<BufferedImage> image, Vector2d pos, int width, int height, int xOff, int yOff) {
@@ -126,17 +126,17 @@ public class Sprite {
     public static void drawArray(Graphics2D g, Font f, String word, Vector2d pos, int width, int height, int xOff, int yOff) {
         float x = pos.x;
         float y = pos.y;
-        
+
         word = word.toUpperCase();
 
         for (int i = 0; i < word.length(); i++) {
-            if(word.charAt(i) != 32){
+            if (word.charAt(i) != 32) {
                 g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
                 x += xOff;
                 y += yOff;
-            }else{
+            } else {
                 x += 10;
             }
         }
     }
-} 
+}

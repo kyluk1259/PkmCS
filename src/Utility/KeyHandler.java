@@ -17,7 +17,7 @@ import pokemoncs.GamePanel;
 public class KeyHandler implements KeyListener {
     
     public static List<Key> keys = new ArrayList<Key>();
-    
+
     public class Key{
         public int presses, absorbs;
         public boolean down, clicked;
@@ -53,7 +53,8 @@ public class KeyHandler implements KeyListener {
     public Key down = new Key();
     public Key left = new Key();
     public Key right = new Key();
-    public Key sprint = new Key();
+    public Key A = new Key();
+    public Key B = new Key();
     public Key menu = new Key();
     
     public void releaseAll(){
@@ -62,18 +63,13 @@ public class KeyHandler implements KeyListener {
         }
     }
     
-    public void tick(){
-        for(int i = 0; i < keys.size(); i++){
-            keys.get(i).toggleClick();
-        }
-    }
-    
     public void toggle(KeyEvent e, boolean pressed){        //Handles key inputs coming to game
-        if(e.getKeyCode() == KeyEvent.VK_W) up.togglePress(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_S) down.togglePress(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_A) left.togglePress(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_D) right.togglePress(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_SHIFT) sprint.togglePress(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_Z) A.togglePress(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_X) B.togglePress(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_UP) up.togglePress(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_DOWN) down.togglePress(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) left.togglePress(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) right.togglePress(pressed);
         if(e.getKeyCode() == KeyEvent.VK_ENTER) menu.togglePress(pressed);
     }
 

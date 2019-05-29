@@ -21,14 +21,17 @@ public class Animation {
     private int delay;
     
     private int timesPlayed;
+    public boolean animating;
     
     public Animation(BufferedImage[] frames){
         timesPlayed = 0;
         setFrames(frames);
+        animating = true;
     }
     
     public Animation(){
         timesPlayed = 0;
+        animating = true;
     }
     
     public void setFrames(BufferedImage[] frames){
@@ -53,6 +56,7 @@ public class Animation {
     }
     
     public void update(){
+        
         if(delay == -1){
             return;
         }
@@ -67,6 +71,14 @@ public class Animation {
             currentFrame = 0;
             timesPlayed++;
         }
+    }
+    
+    public void startAnimating(){
+        animating = true;
+    }
+    
+    public void stopAnimating(){
+        animating = false;
     }
     
     public int getDelay(){

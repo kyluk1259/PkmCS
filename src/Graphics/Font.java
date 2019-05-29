@@ -50,7 +50,6 @@ public class Font {
 
         wLetter = FONTSHEET.getWidth() / w;
         hLetter = FONTSHEET.getHeight() / h;
-        System.out.println(wLetter + ", " + hLetter);
         loadFontArray();
     }
 
@@ -83,7 +82,7 @@ public class Font {
         try {
             font = ImageIO.read(getClass().getClassLoader().getResourceAsStream(fileName));
         } catch (Exception e) {
-            System.out.println("Player Sprites Could Not Be Loaded");
+            System.out.println("Font Could Not Be Loaded");
         }
         return font;
     }
@@ -107,7 +106,7 @@ public class Font {
     }
 
     public BufferedImage getFont(char letter) {
-        int value = letter - 65;
+        int value = letter - 65;            //subtract 65 as it corresponds to the array index of the letters
         int x;
         int y;
 
@@ -137,7 +136,6 @@ public class Font {
             y = value / wLetter;
         }
 
-        System.out.println(x + ", " + y);
         return getLetter(x, y);
     }
 }
