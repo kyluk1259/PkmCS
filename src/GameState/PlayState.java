@@ -6,6 +6,7 @@
 package GameState;
 
 import Entity.Player;
+import Graphics.Background;
 import Graphics.Font;
 import Graphics.Sprite;
 import Utility.KeyHandler;
@@ -21,10 +22,12 @@ public class PlayState extends GameState {
 
     private Font font;
     private Player player;
+    private Background back;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         font = new Font("Font/font.png", 111, 111);
+        back = new Background("TileSets/wat.png");
         player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(300, 300), 80);
         
     }
@@ -38,7 +41,7 @@ public class PlayState extends GameState {
     }
 
     public void render(Graphics2D g) {
-        Sprite.drawArray(g, font, "your mom.", new Vector2d(0, 50), 32, 32, 24, 0);
+        Sprite.drawArray(g, font, "your mom.", new Vector2d(400, 50), 32, 32, 24, 0);
         player.render(g);
     }
 
