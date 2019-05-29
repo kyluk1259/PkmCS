@@ -5,6 +5,7 @@
  */
 package GameState;
 
+import Graphics.Font;
 import Utility.KeyHandler;
 import java.awt.Graphics2D;
 
@@ -15,10 +16,12 @@ import java.awt.Graphics2D;
 public abstract class GameState {
     
     protected GameStateManager gsm;
+    protected Font font;
     
     
     public GameState(GameStateManager gsm){
         this.gsm = gsm;
+        font = new Font("Font/font.png", 111, 111);
     }
     
     public abstract void update();

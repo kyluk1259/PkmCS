@@ -20,12 +20,10 @@ import java.awt.Graphics2D;
  */
 public class PlayState extends GameState {
 
-    private Font font;
     private Player player;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        font = new Font("Font/font.png", 111, 111);
         player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(300, 300), 80);
         
     }

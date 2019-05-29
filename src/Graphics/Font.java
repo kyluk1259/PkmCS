@@ -107,8 +107,8 @@ public class Font {
 
     public BufferedImage getFont(char letter) {
         int value = letter - 65;            //subtract 65 as it corresponds to the array index of the letters
-        int x;
-        int y;
+        int x = 0;
+        int y = 0;
 
         if (letter == '.') {
             x = 8;
@@ -131,6 +131,21 @@ public class Font {
         } else if (letter == '*') {
             x = 3;
             y = 4;
+        } else if (Character.isDigit(letter)) {
+
+            if (letter == '9') {
+                x = 0;
+                y = 4;
+            } else {
+                for (int i = 0; i < 9; i++) {
+                    String in = Integer.toString(i);
+                    char num = in.charAt(0);
+                    if (letter == num) {
+                        x = 0 + i;
+                        y = 3;
+                    }
+                }
+            }
         } else {
             x = value % wLetter;
             y = value / wLetter;
