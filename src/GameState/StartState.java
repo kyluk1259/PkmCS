@@ -9,6 +9,7 @@ import static GameState.GameStateManager.PLAYSTATE;
 import Graphics.Background;
 import Utility.KeyHandler;
 import Utility.Vector2d;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -34,6 +35,12 @@ public class StartState extends GameState {
     public void input(KeyHandler key) {
         if(key.menu.down){
             System.out.print("pressed");
+            try{
+            Thread.sleep(1000);
+            currentBackground = null;
+        }catch(Exception e){
+            
+        }
             gsm.addAndPop(PLAYSTATE);
         }
     }
