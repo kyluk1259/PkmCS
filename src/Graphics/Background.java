@@ -23,7 +23,7 @@ public class Background {
     
     public Background(String fileName){
         w = 800;
-        h = 340;
+        h = 640;
 
         System.out.println("Loading: " + fileName + "...");
         background = loadBackground(fileName);
@@ -35,7 +35,7 @@ public class Background {
         try {
             image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(fileName));
         } catch (Exception e) {
-            System.out.println("Player Sprites Could Not Be Loaded");
+            System.out.println("Background '"+ fileName + "' Could Not Be Loaded");
         }
         return image;
     }
@@ -54,4 +54,3 @@ public class Background {
             y += yOff;
         }
     }
-

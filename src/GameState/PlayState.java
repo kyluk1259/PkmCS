@@ -22,12 +22,10 @@ public class PlayState extends GameState {
 
     private Font font;
     private Player player;
-    private Background back;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         font = new Font("Font/font.png", 111, 111);
-        back = new Background("TileSets/wat.png");
         player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(300, 300), 80);
         
     }
