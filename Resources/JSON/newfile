@@ -1,0 +1,24 @@
+private float count;
+private Random rand;
+private int maxA, maxB, maxC, maxD;
+private double multA, multB, multC, multD;
+
+private void newRandom(){
+        maxA = rand.nextInt(4) + 2;
+        maxB = rand.nextInt(4) + 2;
+        maxC = rand.nextInt(4) + 2;
+        maxD = rand.nextInt(4) + 2;
+
+        multA = rand.nextDouble() + maxA;
+        multB = rand.nextDouble() + maxB;
+        multC = rand.nextDouble() + maxC;
+        multD = rand.nextDouble() + maxD;
+    }
+
+  private void snow(Graphics2D g) {
+        g.fillOval((int) (0 + count * multA), 300, 10, 10);
+        g.fillOval((int) (-15 + count * multB), 215, 10, 10);
+        g.fillOval((int) (-50 + count * multC), 76, 10, 10);
+        g.fillOval((int) (-25 + count * multD), 124, 10, 10);
+        g.fillOval((int) (0 + count * multC), 478, 10, 10);
+    }
