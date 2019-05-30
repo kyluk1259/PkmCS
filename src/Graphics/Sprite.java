@@ -139,4 +139,17 @@ public class Sprite {
             }
         }
     }
+
+    public static void printLetters(Graphics2D g, Font f, char letter, Vector2d pos, int width, int height, int xOff, int yOff) {
+        float x = pos.x;
+        float y = pos.y;
+
+        if (letter != 32) {
+            g.drawImage(f.getFont(letter), (int) x, (int) y, width, height, null);
+            x += xOff;
+            y += yOff;
+        } else {
+            x += 10;
+        }
+    }
 }
