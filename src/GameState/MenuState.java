@@ -7,6 +7,7 @@ package GameState;
 
 import Utility.KeyHandler;
 import java.awt.Graphics2D;
+import Graphics.Background;
 
 /**
  *
@@ -14,6 +15,8 @@ import java.awt.Graphics2D;
  */
 public class MenuState extends GameState {
 
+    private Background menuBackground, startBackground, currentBackground;
+    
     public MenuState(GameStateManager gsm) {
         super(gsm);
     }
