@@ -21,15 +21,34 @@ import java.awt.Graphics2D;
 public class PlayState extends GameState {
 
     private Player player;
+    private int flash, count;
+    private String test;
+    private char letter;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        flash = 0;
+        count = 0;
         player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(300, 300), 80);
-        
+        test = "test";
+        test = test.toUpperCase();
     }
 
     public void update() {
+        test = test.toUpperCase();
+        if(flash != 5){
+            flash++;
+        }else{
+            flash = 0;
+        }
+        
+        if(count != test.length()){
+            count++;
+        }else{
+            count = 0;
+        }
         player.update();
+        letter = test.charAt(count - 1);
     }
 
     public void input(KeyHandler key) {
@@ -37,7 +56,7 @@ public class PlayState extends GameState {
     }
 
     public void render(Graphics2D g) {
-        Sprite.drawArray(g, font, "your mom.", new Vector2d(400, 50), 32, 32, 24, 0);
+        Sprite.printLetters(g, font, letter, new Vector2d(400, 50), 32, 32, 24, 0);
         player.render(g);
     }
 
