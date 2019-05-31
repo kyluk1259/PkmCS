@@ -57,7 +57,7 @@ public class StartState extends GameState {
     @Override
     public void update() {
 
-        if (count != 500) {
+        if (count != 800) {
             count++;
         } else {
             newRandom();
@@ -73,8 +73,8 @@ public class StartState extends GameState {
 
     @Override
     public void input(KeyHandler key) {
-        if (key.menu.down) {
-            System.out.print("pressed");
+        if (key.menu.clicked) {
+            System.out.println("\nStarting Game\n");
             try {
                 Thread.sleep(800);
                 currentBackground = null;

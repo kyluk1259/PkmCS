@@ -5,14 +5,13 @@
  */
 package Entity;
 
+import GameState.PlayState;
+import static GameState.PlayState.*;
 import Graphics.Sprite;
 import Utility.KeyHandler;
-import Utility.KeyHandler.Key;
-import static Utility.KeyHandler.keys;
 import Utility.Vector2d;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 /**
  *
@@ -84,6 +83,18 @@ public class Player extends Entity {
             }
         }
 
+        if (interact) {
+            PlayState.index = 0;
+            PlayState.text = "Hello and welcome to the world of pokekaune. Maps and Pokemon will be added soon.";
+            PlayState.loadText = true;
+            interact = false;
+        }
+        
+        if (back && !pause) {
+            PlayState.loadText = false;
+            back = false;
+        }
+
         if (back && pause) {
 
             ani.startAnimating();
@@ -91,9 +102,10 @@ public class Player extends Entity {
             animate();
 
             if (ani.hasPlayed(1)) {
-                
+
                 closeBag = false;
                 pause = false;
+                back = false;
             }
         }
     }
@@ -132,36 +144,28 @@ public class Player extends Entity {
             right = false;
         }
 
-        if (key.A.down) {
+        if (key.A.clicked) {
             interact = true;
-        } else {
-            interact = false;
         }
 
-        if (key.menu.down) {
+        if (key.menu.clicked) {
             openBag = true;
         }
 
-        if (key.B.down) {
-            if (pause == true) {
-                back = true;
-            } else {
-                sprite = runSprite;
-                sprint = true;
-            }
-
-        } else {
-            if (pause == false) {
-                back = false;
-            }
-
+        if (key.B.down && !sprint) {
+            back = true;
+            sprite = runSprite;
+            sprint = true;
+        } 
+        
+        if(!key.B.down && sprint){
             sprite = walkSprite;
             sprint = false;
         }
+
     }
 
     public void render(Graphics2D g) {
         g.drawImage(renderImage, (int) (pos.x), (int) (pos.y), size, size, null);
     }
-
 }

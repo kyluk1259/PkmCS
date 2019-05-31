@@ -151,9 +151,6 @@ public abstract class Entity {
     public void update() {
         if (ani.animating == true) {
             animate();
-            if (sprint == true) {
-                System.out.println("TRUE");
-            }
             setInteractDirection();
             ani.update();
         }

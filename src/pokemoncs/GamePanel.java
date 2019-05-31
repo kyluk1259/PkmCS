@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static int scale = 2;
 
     //game run thread
-    private Thread thread;
+    public Thread thread;
     private boolean running = false;
 
     //images

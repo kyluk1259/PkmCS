@@ -9,7 +9,10 @@ import Utility.Vector2d;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
+import static pokemoncs.PokemonCS.game;
 
 /**
  *
@@ -35,6 +38,7 @@ public class Sprite {
         wSprite = SPRITESHEET.getWidth() / w;
         hSprite = SPRITESHEET.getHeight() / h;
         loadSpriteArray();
+
     }
 
     public Sprite(String fileName, int w, int h) {
@@ -132,11 +136,40 @@ public class Sprite {
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) != 32) {
                 g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+                if(x > 850){
+                    x = 0;
+                    y += 50;
+                }else{
+                x += xOff;
+                y += yOff;
+                }
+            } else {
+                x += 10;
+            }
+        }
+    }
+
+    public static void drawText(Graphics2D g, Font f, String word, Vector2d pos, int width, int height, int xOff, int yOff, int index) {
+        word = word.toUpperCase();
+        float x = pos.x;
+        float y = pos.y;
+        for (int i = 0; i < index; i++) {
+            if (word.charAt(i) != 32) {
+                g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+                 if(x > 720){
+                    x = 20;
+                    y += 50;
+                }
                 x += xOff;
                 y += yOff;
             } else {
                 x += 10;
             }
+        }
+        try {
+            TimeUnit.MILLISECONDS.sleep(10);
+        } catch (InterruptedException e) {
+
         }
     }
 }
