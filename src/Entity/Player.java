@@ -30,6 +30,10 @@ public class Player extends Entity {
     }
 
     public void move() {
+        if(sprint){
+            sprite = runSprite;
+        }
+        
         if (up) {
             dy -= moveSpeed;
         } else {
@@ -83,15 +87,17 @@ public class Player extends Entity {
             }
         }
 
-        if (interact) {
+        if (interact && PlayState.loadText == false) {
             PlayState.index = 0;
             PlayState.text = "Hello and welcome to the world of pokekaune. Maps and Pokemon will be added soon.";
             PlayState.loadText = true;
             interact = false;
         }
-        
-        if (back && !pause) {
+
+        if (back && PlayState.textComplete == true && !pause) {
             PlayState.loadText = false;
+            back = false;
+        }else if (back && PlayState.textComplete == false && !pause){
             back = false;
         }
 
@@ -101,11 +107,11 @@ public class Player extends Entity {
             closeBag = true;
             animate();
 
-            if (ani.hasPlayed(1)) {
-
-                closeBag = false;
+            if (ani.hasPlayed(2)) {
                 pause = false;
                 back = false;
+                closeBag = false;
+                sprite = walkSprite;
             }
         }
     }
@@ -144,23 +150,27 @@ public class Player extends Entity {
             right = false;
         }
 
-        if (key.A.clicked) {
+        if (key.A.clicked && !pause) {
             interact = true;
+        }else{
+            
         }
-
+        
         if (key.menu.clicked) {
             openBag = true;
         }
 
-        if (key.B.down && !sprint) {
+        if (key.B.clicked) {
             back = true;
-            sprite = runSprite;
+        }
+
+        if (key.B.down && !sprint) {
             sprint = true;
-        } 
+        }
         
         if(!key.B.down && sprint){
-            sprite = walkSprite;
             sprint = false;
+            sprite = walkSprite;
         }
 
     }

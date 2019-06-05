@@ -23,7 +23,7 @@ public class BlackoutState extends GameState {
         color = 0;
         count = 255;
         renderStop = false;
-        name = "David";
+        name = "Jackson";
         text = name + " blacked out and lost *400. " + name + " woke up at the nearest pokemon centre.";
         index = 0;
     }
@@ -49,10 +49,10 @@ public class BlackoutState extends GameState {
     public void render(Graphics2D g) {
         if(renderStop != true){
         g.setColor(new Color (color, color, color));
-        g.fillRect(0,0,800,640);
+        g.fillRect(0,0,840,640);
         g.setColor(Color.white);
-        g.fillRect(0, 480, 800, 160);
-        Sprite.drawText(g, font, text, new Vector2d(50, 510), 24, 24, 20, 0, index);
+        g.fillRect(0, 480, 840, 160);
+        Sprite.drawText(g, font, text, new Vector2d(25, 510), 24, 24, 20, 0, index);
         if (index == text.length()) {
                 index = text.length();
                 renderStop = true;

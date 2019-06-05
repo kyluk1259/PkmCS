@@ -13,6 +13,7 @@ import Utility.KeyHandler;
 import Utility.Vector2d;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import pokemoncs.GamePanel;
 
 /**
  *
@@ -21,7 +22,7 @@ import java.awt.Graphics2D;
 public class PlayState extends GameState {
 
     private Player player;
-    public static boolean loadText;
+    public static boolean loadText, textComplete;
     public static String text;
     public static int index = 0;
     private float xStart;
@@ -29,11 +30,13 @@ public class PlayState extends GameState {
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(300, 300), 80);
+        float posx = (int) ((GamePanel.getW() / 2) - (38));
+        float posy = (int) ((GamePanel.getH() / 2) - (38));
+        player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(posx, posy), 80);
         loadText = false;
         index = 0;
-        xStart = 50;
-        x = xStart;
+        xStart = 25;
+        textComplete = false;
     }
 
     public void update() {
@@ -46,15 +49,22 @@ public class PlayState extends GameState {
 
     public void render(Graphics2D g) {
         player.render(g);
+        g.setColor(Color.red);
+        g.drawLine(420, 0, 420, 640);
+        g.drawLine(0, 320, 840, 320);
         if (loadText == true) {
             Sprite.drawText(g, font, text, new Vector2d(xStart, 400), 32, 32, 24, 0, index);
             if (index == text.length()) {
                 index = text.length();
+                textComplete = true;
             } else {
                 index++;
             }
-        }else{
-            Sprite.drawArray(g, font, "Press Z", new Vector2d(xStart, 400), 32, 32, 24, 0);
+        } else {
+            Sprite.drawArray(g, font, "Press Z to read message", new Vector2d(xStart, 400), 32, 32, 24, 0);
+            Sprite.drawArray(g, font, "Hold X when not moving and move in a direction to run", new Vector2d(xStart, 450), 32, 32, 24, 0);
+            Sprite.drawArray(g, font, "Press Enter to pause", new Vector2d(xStart, 550), 32, 32, 24, 0);
+            Sprite.drawArray(g, font, "Press X to unpause game", new Vector2d(xStart, 600), 32, 32, 24, 0);
         }
     }
 }

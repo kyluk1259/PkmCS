@@ -132,19 +132,27 @@ public class Sprite {
         float y = pos.y;
 
         word = word.toUpperCase();
-
         for (int i = 0; i < word.length(); i++) {
+            String sub = word.substring(i);
             if (word.charAt(i) != 32) {
                 g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
-                if(x > 850){
-                    x = 0;
-                    y += 50;
-                }else{
                 x += xOff;
                 y += yOff;
-                }
             } else {
-                x += 10;
+                String space = word.substring(i);
+                for (int j = 0; j < sub.length(); j++) {
+                    if (space.charAt(j) == 32) {
+                        space = space.substring(0, j);
+                        int calc = space.length() * (width + xOff);
+                        if (x + calc > 720) {
+                            x = 25;
+                            y += 50;
+                        } else {
+                            x += 10;
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
@@ -153,17 +161,28 @@ public class Sprite {
         word = word.toUpperCase();
         float x = pos.x;
         float y = pos.y;
+
         for (int i = 0; i < index; i++) {
+            String sub = word.substring(i);
             if (word.charAt(i) != 32) {
                 g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
-                 if(x > 720){
-                    x = 20;
-                    y += 50;
-                }
                 x += xOff;
                 y += yOff;
             } else {
-                x += 10;
+                String space = word.substring(i);
+                for (int j = 0; j < sub.length(); j++) {
+                    if (space.charAt(j) == 32) {
+                        space = space.substring(0, j);
+                        int calc = space.length() * (width + xOff);
+                        if (x + calc > 720) {
+                            x = 25;
+                            y += 50;
+                        } else {
+                            x += 10;
+                        }
+                        break;
+                    }
+                }
             }
         }
         try {

@@ -24,7 +24,7 @@ public class PokemonCS {
         game = new GamePanel();
         gameWindow.add(game);
         gameWindow.setResizable(false);
-        gameWindow.setSize(400, 320);
+        gameWindow.setSize(420, 320);
         gameWindow.pack();
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setVisible(true);

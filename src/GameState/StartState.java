@@ -39,7 +39,7 @@ public class StartState extends GameState {
         rand = new Random();
         newRandom();
         pressStart = "PRESS ENTER";
-        posx = (int) ((GamePanel.getW() / 2) - (pressStart.length() * 56) / 5.2);
+        posx = (int) ((GamePanel.getW() / 2) - (pressStart.length() * 56) / 4.85);
         posy = (int) (GamePanel.getH() - 100);
     }
 
@@ -133,12 +133,16 @@ public class StartState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
+        
         Background.drawImage(g, currentBackground.getBackground(), new Vector2d(0, 0), 0, 0);
         g.setColor(Color.white);
         snow(g);
         if (flash != 0 && flash != 1) {
             Sprite.drawArray(g, font, pressStart, new Vector2d(posx, posy), 32, 32, 24, 0);
         }
+        g.setColor(Color.red);
+        g.drawLine(420, 0, 420, 640);
+        g.drawLine(0, 320, 840, 320);
     }
 
 }
