@@ -22,7 +22,7 @@ public class Background {
     
     
     public Background(String fileName){
-        w = 800;
+        w = 840;
         h = 640;
 
         System.out.println("Loading: " + fileName + "...");

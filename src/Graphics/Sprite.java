@@ -9,7 +9,10 @@ import Utility.Vector2d;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
+import static pokemoncs.PokemonCS.game;
 
 /**
  *
@@ -35,6 +38,7 @@ public class Sprite {
         wSprite = SPRITESHEET.getWidth() / w;
         hSprite = SPRITESHEET.getHeight() / h;
         loadSpriteArray();
+
     }
 
     public Sprite(String fileName, int w, int h) {
@@ -128,28 +132,63 @@ public class Sprite {
         float y = pos.y;
 
         word = word.toUpperCase();
-
         for (int i = 0; i < word.length(); i++) {
+            String sub = word.substring(i);
             if (word.charAt(i) != 32) {
                 g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
                 x += xOff;
                 y += yOff;
             } else {
-                x += 10;
+                String space = word.substring(i);
+                for (int j = 0; j < sub.length(); j++) {
+                    if (space.charAt(j) == 32) {
+                        space = space.substring(0, j);
+                        int calc = space.length() * (width + xOff);
+                        if (x + calc > 720) {
+                            x = 25;
+                            y += 50;
+                        } else {
+                            x += 10;
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
-
-    public static void printLetters(Graphics2D g, Font f, char letter, Vector2d pos, int width, int height, int xOff, int yOff) {
+            
+    public static void drawText(Graphics2D g, Font f, String word, Vector2d pos, int width, int height, int xOff, int yOff, int index) {
+        word = word.toUpperCase();
         float x = pos.x;
         float y = pos.y;
 
-        if (letter != 32) {
-            g.drawImage(f.getFont(letter), (int) x, (int) y, width, height, null);
-            x += xOff;
-            y += yOff;
-        } else {
-            x += 10;
+        for (int i = 0; i < index; i++) {
+            String sub = word.substring(i);
+            if (word.charAt(i) != 32) {
+                g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+                x += xOff;
+                y += yOff;
+            } else {
+                String space = word.substring(i);
+                for (int j = 0; j < sub.length(); j++) {
+                    if (space.charAt(j) == 32) {
+                        space = space.substring(0, j);
+                        int calc = space.length() * (width + xOff);
+                        if (x + calc > 720) {
+                            x = 25;
+                            y += 50;
+                        } else {
+                            x += 10;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        try {
+            TimeUnit.MILLISECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            
+        }
         }
     }
-}

@@ -5,14 +5,13 @@
  */
 package Entity;
 
+import GameState.PlayState;
+import static GameState.PlayState.*;
 import Graphics.Sprite;
 import Utility.KeyHandler;
-import Utility.KeyHandler.Key;
-import static Utility.KeyHandler.keys;
 import Utility.Vector2d;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 /**
  *
@@ -31,6 +30,10 @@ public class Player extends Entity {
     }
 
     public void move() {
+        if(sprint){
+            sprite = runSprite;
+        }
+        
         if (up) {
             dy -= moveSpeed;
         } else {
@@ -84,16 +87,31 @@ public class Player extends Entity {
             }
         }
 
+        if (interact && PlayState.loadText == false) {
+            PlayState.index = 0;
+            PlayState.text = "Hello and welcome to the world of pokekaune. Maps and Pokemon will be added soon.";
+            PlayState.loadText = true;
+            interact = false;
+        }
+
+        if (back && PlayState.textComplete == true && !pause) {
+            PlayState.loadText = false;
+            back = false;
+        }else if (back && PlayState.textComplete == false && !pause){
+            back = false;
+        }
+
         if (back && pause) {
 
             ani.startAnimating();
             closeBag = true;
             animate();
 
-            if (ani.hasPlayed(1)) {
-                
-                closeBag = false;
+            if (ani.hasPlayed(2)) {
                 pause = false;
+                back = false;
+                closeBag = false;
+                sprite = walkSprite;
             }
         }
     }
@@ -132,36 +150,32 @@ public class Player extends Entity {
             right = false;
         }
 
-        if (key.A.down) {
+        if (key.A.clicked && !pause) {
             interact = true;
-        } else {
-            interact = false;
+        }else{
+            
         }
-
-        if (key.menu.down) {
+        
+        if (key.menu.clicked) {
             openBag = true;
         }
 
-        if (key.B.down) {
-            if (pause == true) {
-                back = true;
-            } else {
-                sprite = runSprite;
-                sprint = true;
-            }
-
-        } else {
-            if (pause == false) {
-                back = false;
-            }
-
-            sprite = walkSprite;
-            sprint = false;
+        if (key.B.clicked) {
+            back = true;
         }
+
+        if (key.B.down && !sprint) {
+            sprint = true;
+        }
+        
+        if(!key.B.down && sprint){
+            sprint = false;
+            sprite = walkSprite;
+        }
+
     }
 
     public void render(Graphics2D g) {
         g.drawImage(renderImage, (int) (pos.x), (int) (pos.y), size, size, null);
     }
-
 }

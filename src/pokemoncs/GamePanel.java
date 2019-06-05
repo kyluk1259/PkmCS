@@ -23,12 +23,12 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements Runnable {
 
     //screen dimensions
-    public static int width = 400;
+    public static int width = 420;
     public static int height = 320;
     public static int scale = 2;
 
     //game run thread
-    private Thread thread;
+    public Thread thread;
     private boolean running = false;
 
     //images
@@ -71,7 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         init();
 
-        final double REFRESH = 60; //Refresh rate (FPS = refresh rate / target fps)
+        final double REFRESH = 70; //Refresh rate (FPS = refresh rate / target fps)
         final double UPDATE = 1000000000 / REFRESH; //Time before each update
 
         final int BEFORERENDER = 5; // force update before render
