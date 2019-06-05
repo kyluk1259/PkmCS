@@ -191,4 +191,14 @@ public class Sprite {
             
         }
         }
+    
+        public static void drawImage(Graphics2D g, BufferedImage image, Vector2d pos, int width, int height) {
+        float x = pos.x;
+        float y = pos.y;
+
+            if (image != null) {
+                g.drawImage(image, (int) x, (int) y, width, height, null);
+            }
+    }
+    
     }
