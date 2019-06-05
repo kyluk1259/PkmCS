@@ -18,56 +18,54 @@ public class BlackoutState extends GameState {
     private int color, count, index;
     private boolean renderStop;
     private String name, text;
+
     public BlackoutState(GameStateManager gsm) {
         super(gsm);
         color = 0;
         count = 255;
         renderStop = false;
-        name = "Jackson";
-        text = name + " blacked out and lost *400. " + name + " woke up at the nearest pokemon centre.";
+        text = "You blacked out and lost *400. You woke up at the nearest pokemon centre fully healed.";
         index = 0;
     }
 
     @Override
     public void update() {
-        if(count != 0){
-            count --; 
-        }else{
+        if (count != 0) {
+            count--;
+        } else {
             count = 0;
         }
-        
-    color = count;
-   
+
+        color = count;
+
     }
 
-    @Override
     public void input(KeyHandler key) {
-        
+
     }
 
-    @Override
     public void render(Graphics2D g) {
-        if(renderStop != true){
-        g.setColor(new Color (color, color, color));
-        g.fillRect(0,0,840,640);
-        g.setColor(Color.white);
-        g.fillRect(0, 480, 840, 160);
-        Sprite.drawText(g, font, text, new Vector2d(25, 510), 24, 24, 20, 0, index);
-        if (index == text.length()) {
+        if (renderStop != true) {
+            g.setColor(new Color(color, color, color));
+            g.fillRect(0, 0, 840, 640);
+            g.setColor(Color.white);
+            g.fillRect(0, 480, 840, 160);
+            Sprite.drawText(g, font, text, new Vector2d(25, 510), 24, 24, 20, 0, index);
+            if (index == text.length()) {
                 index = text.length();
                 renderStop = true;
             } else {
                 index++;
             }
-        }else{
+        } else {
             try {
-             TimeUnit.MILLISECONDS.sleep(1000);
-        } catch (InterruptedException e) {
-
-        }
+                TimeUnit.MILLISECONDS.sleep(2000);
+            } catch (InterruptedException e) {
+                System.out.println("BlackoutState ERROR: Couldn't load PlayState");
+            }
             gsm.addAndPop(PLAYSTATE);
         }
-        
+
     }
-    
+
 }

@@ -156,7 +156,7 @@ public class Sprite {
             }
         }
     }
-            
+
     public static void drawText(Graphics2D g, Font f, String word, Vector2d pos, int width, int height, int xOff, int yOff, int index) {
         word = word.toUpperCase();
         float x = pos.x;
@@ -188,17 +188,16 @@ public class Sprite {
         try {
             TimeUnit.MILLISECONDS.sleep(10);
         } catch (InterruptedException e) {
-            
+            System.out.println("SPRITE ERROR: COULDN'T SEQUENTIALLY PRINT TEXT");
         }
-        }
-    
-        public static void drawImage(Graphics2D g, BufferedImage image, Vector2d pos, int width, int height) {
+    }
+
+    public static void drawImage(Graphics2D g, BufferedImage image, Vector2d pos, int width, int height) {
         float x = pos.x;
         float y = pos.y;
 
-            if (image != null) {
-                g.drawImage(image, (int) x, (int) y, width, height, null);
-            }
+        if (image != null) {
+            g.drawImage(image, (int) x, (int) y, width, height, null);
+        }
     }
-    
-    }
+}
