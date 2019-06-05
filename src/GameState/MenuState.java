@@ -33,7 +33,7 @@ public class MenuState extends GameState {
         super(gsm);
         //font = new Font("Font/font.png", 111, 111);
         pokemon = "Pokemon";
-        pokeBall = new Sprite("Sprites/pokemonBall.png.png");
+        pokeBall = new Sprite("Images/pokemonBall.png");
         //JOptionPane.showMessageDialog(null, pokeBall);
     }
 
@@ -49,11 +49,16 @@ public class MenuState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
+        //Rectangle
         g.setColor(Color.white);
-        g.fillRect(600, 0, 200, 640);
+        g.fillRect(600, 0, 240, 640);
+        
+        //ICONS
+        Sprite.drawImage(g, pokeBall, new Vector2d(760, 168), 24, 24);
+        
+        //Text        
         Sprite.drawArray(g, font, "Menu", new Vector2d(625, 75), 48, 48, 36, 0);
         Sprite.drawArray(g, font, pokemon, new Vector2d(610, 170), 24, 24, 20, 0);
-        Sprite.drawImage(g, pokeBall.getSpriteSheet(), new Vector2d(700, 170), 24, 24);
         Sprite.drawArray(g, font, "Bag", new Vector2d(610, 230), 24, 24, 20, 0);
         Sprite.drawArray(g, font, "Save", new Vector2d(610, 290), 24, 24, 20, 0);
         Sprite.drawArray(g, font, "Exit", new Vector2d(610, 350), 24, 24, 20, 0);
