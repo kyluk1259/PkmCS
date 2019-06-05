@@ -25,7 +25,7 @@ public class MenuState extends GameState {
     private String playerName;
     private int money;
     private String moneyAmount;
-    private Sprite pokeBall;
+    private Sprite pokeBall, bag, save;
     private Font Sprites;
     
 
@@ -34,6 +34,8 @@ public class MenuState extends GameState {
         //font = new Font("Font/font.png", 111, 111);
         pokemon = "Pokemon";
         pokeBall = new Sprite("Images/pokemonBall.png");
+        bag = new Sprite("Images/bag.png");
+        save = new Sprite("Images/save.png");
         //JOptionPane.showMessageDialog(null, pokeBall);
     }
 
@@ -54,7 +56,9 @@ public class MenuState extends GameState {
         g.fillRect(600, 0, 240, 640);
         
         //ICONS
-        Sprite.drawImage(g, pokeBall, new Vector2d(760, 168), 24, 24);
+        Sprite.drawImage(g, pokeBall, new Vector2d(760, 160), 40, 40);
+        Sprite.drawImage(g, bag, new Vector2d(760, 220), 45, 40);
+        Sprite.drawImage(g, save, new Vector2d(760, 280), 40, 40);
         
         //Text        
         Sprite.drawArray(g, font, "Menu", new Vector2d(625, 75), 48, 48, 36, 0);
