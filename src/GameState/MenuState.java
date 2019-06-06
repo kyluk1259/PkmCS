@@ -23,25 +23,32 @@ public class MenuState extends GameState {
     //private Font font;
     private String pokemon;
     private String playerName;
-    private int money;
-    private String moneyAmount;
+    private int money, flash, selection;
     private Sprite pokeBall, bag, save;
     private Font Sprites;
     
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        //font = new Font("Font/font.png", 111, 111);
+        
+        flash = 0;
+        selection = 1;
+        
         pokemon = "Pokemon";
         pokeBall = new Sprite("Images/pokemonBall.png");
         bag = new Sprite("Images/bag.png");
         save = new Sprite("Images/save.png");
-        //JOptionPane.showMessageDialog(null, pokeBall);
     }
 
     @Override
     public void update() {
         
+
+        if (flash != 5) {
+            flash++;
+        } else {
+            flash = 0;
+        }
     }
 
     @Override
@@ -66,6 +73,17 @@ public class MenuState extends GameState {
         Sprite.drawArray(g, font, "Bag", new Vector2d(610, 230), 24, 24, 20, 0);
         Sprite.drawArray(g, font, "Save", new Vector2d(610, 290), 24, 24, 20, 0);
         Sprite.drawArray(g, font, "Exit", new Vector2d(610, 350), 24, 24, 20, 0);
+        
+        //Selection
+        switch(selection){
+            case 1:
+                g.drawLine(760, 190, 850, 190);
+            case 2:
+                
+            case 3:
+                
+            case 4:
+        }
         //Sprite.drawArray(g, font, playerName, new Vector2d(600, 150), 16, 16, 16, 0);
         //Sprite.drawArray(g, font, moneyAmount, new Vector2d(600, 150), 16, 16, 16, 0);
     }
