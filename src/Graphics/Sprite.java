@@ -82,7 +82,7 @@ public class Sprite {
         try {
             sprite = ImageIO.read(getClass().getClassLoader().getResourceAsStream(fileName));
         } catch (Exception e) {
-            System.out.println("Player Sprites Could Not Be Loaded");
+            System.out.println("Sprites Could Not Be Loaded");
         }
         return sprite;
     }
