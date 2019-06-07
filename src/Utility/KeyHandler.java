@@ -119,6 +119,22 @@ public class KeyHandler implements KeyListener {
             menu.toggleClick(pressed);
             e.consume();
         }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            up.toggleClick(pressed);
+            e.consume();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            down.toggleClick(pressed);
+            e.consume();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            right.toggleClick(pressed);
+            e.consume();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            left.toggleClick(pressed);
+            e.consume();
+        }
     }
 
     @Override

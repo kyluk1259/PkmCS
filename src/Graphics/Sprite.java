@@ -7,6 +7,7 @@ package Graphics;
 
 import Utility.Vector2d;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -200,4 +201,11 @@ public class Sprite {
             g.drawImage(image, (int) x, (int) y, width, height, null);
         }
     }
+
+    public static void drawImage(Graphics2D g, Image image, Vector2d pos, int width, int height) {
+        float x = pos.x;
+        float y = pos.y;
+        g.drawImage(image, (int) x, (int) y, width, height, null);
+    }
+    
 }

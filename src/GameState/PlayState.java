@@ -21,11 +21,8 @@ import pokemoncs.GamePanel;
  */
 public class PlayState extends GameState {
 
-    private Player player;
-    private int flash, count;
-    private String test;
-    private char letter;
-    public static boolean loadText, textComplete;
+    public static Player player;
+    public static boolean loadText, textComplete, pause;
     public static String text;
     public static int index = 0;
     private float xStart;
@@ -33,40 +30,30 @@ public class PlayState extends GameState {
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        flash = 0;
-        count = 0;
-        test = "test";
-        test = test.toUpperCase();
         float posx = (int) ((GamePanel.getW() / 2) - (38));
         float posy = (int) ((GamePanel.getH() / 2) - (38));
-        player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(posx, posy), 80);
+        player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(posx, posy), 80, gsm);
         loadText = false;
         index = 0;
         xStart = 25;
+        pause = false;
         textComplete = false;
     }
 
     public void update() {
-        test = test.toUpperCase();
-        if(flash != 5){
-            flash++;
-        }else{
-            flash = 0;
-        }
-        
-        if(count != test.length()){
-            count++;
-        }else{
-            count = 0;
-        }
+        if(pause != true){
         player.update();
+        }
     }
 
     public void input(KeyHandler key) {
+        if(pause != true){
         player.input(key);
+        }
     }
 
     public void render(Graphics2D g) {
+        if(pause != true){
         player.render(g);
         g.setColor(Color.red);
         g.drawLine(420, 0, 420, 640);
@@ -85,5 +72,6 @@ public class PlayState extends GameState {
             Sprite.drawArray(g, font, "Press Enter to pause", new Vector2d(xStart, 550), 32, 32, 24, 0);
             Sprite.drawArray(g, font, "Press X to unpause game", new Vector2d(xStart, 600), 32, 32, 24, 0);
         }
+    }
     }
 }
