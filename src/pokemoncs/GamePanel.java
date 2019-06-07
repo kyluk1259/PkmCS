@@ -6,6 +6,7 @@
 package pokemoncs;
 
 import GameState.GameStateManager;
+import Pokemon.Pokedex;
 import Utility.KeyHandler;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     //images
     private BufferedImage image;
     private Graphics2D g;
+    private Pokedex loadPokemon;
 
     //input method
     private KeyHandler key;
@@ -64,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g = (Graphics2D) image.getGraphics();
         key = new KeyHandler(this); //initialize key handler
+        loadPokemon = new Pokedex();
 
         gsm = new GameStateManager();
     }

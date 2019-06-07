@@ -7,11 +7,14 @@ package Entity;
 
 import Graphics.Animation;
 import Graphics.Sprite;
+import Pokemon.Item;
+import Pokemon.Pokemon;
 import Utility.AABB;
 import Utility.KeyHandler;
 import Utility.Vector2d;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
@@ -51,6 +54,9 @@ public abstract class Entity {
 
     protected AABB hitBounds;
     protected AABB bounds;
+
+    protected ArrayList<Pokemon> pokemon = new ArrayList();
+    protected ArrayList<Item> playerBag = new ArrayList();
 
     public Entity(Sprite sprite, Vector2d origin, int size) {
         this.sprite = sprite;
@@ -160,5 +166,21 @@ public abstract class Entity {
 
     public void input(KeyHandler key) {
 
+    }
+
+    public Item getBagItem(int i) {
+        return playerBag.get(i);
+    }
+
+    public void addBagItem(Item item) {
+            playerBag.add(item);
+    }
+
+    public Pokemon getPokemon(int i) {
+        return pokemon.get(i);
+    }
+
+    public void addPokemon(Pokemon pkm) {
+        pokemon.add(pkm);
     }
 }

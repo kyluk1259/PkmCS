@@ -6,8 +6,6 @@
 package GameState;
 
 import Entity.Player;
-import Graphics.Background;
-import Graphics.Font;
 import Graphics.Sprite;
 import Utility.KeyHandler;
 import Utility.Vector2d;
@@ -21,8 +19,8 @@ import pokemoncs.GamePanel;
  */
 public class PlayState extends GameState {
 
-    private Player player;
-    public static boolean loadText, textComplete;
+    public static Player player;
+    public static boolean loadText, textComplete, pause;
     public static String text;
     public static int index = 0;
     private float xStart;
@@ -32,39 +30,46 @@ public class PlayState extends GameState {
         super(gsm);
         float posx = (int) ((GamePanel.getW() / 2) - (38));
         float posy = (int) ((GamePanel.getH() / 2) - (38));
-        player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(posx, posy), 80);
+        player = new Player(new Sprite("Sprites/playerwalking.png", 38, 38), new Vector2d(posx, posy), 80, gsm);
         loadText = false;
         index = 0;
         xStart = 25;
         textComplete = false;
+        pause = false;
     }
 
     public void update() {
-        player.update();
+        if (pause == false) {
+            player.update();
+        }
     }
 
     public void input(KeyHandler key) {
-        player.input(key);
+        if (pause == false) {
+            player.input(key);
+        }
     }
 
     public void render(Graphics2D g) {
-        player.render(g);
-        g.setColor(Color.red);
-        g.drawLine(420, 0, 420, 640);
-        g.drawLine(0, 320, 840, 320);
-        if (loadText == true) {
-            Sprite.drawText(g, font, text, new Vector2d(xStart, 400), 32, 32, 24, 0, index);
-            if (index == text.length()) {
-                index = text.length();
-                textComplete = true;
+        if (pause == false) {
+            player.render(g);
+            g.setColor(Color.red);
+            g.drawLine(420, 0, 420, 640);
+            g.drawLine(0, 320, 840, 320);
+            if (loadText == true) {
+                Sprite.drawText(g, font, text, new Vector2d(xStart, 400), 32, 32, 24, 0, index);
+                if (index == text.length()) {
+                    index = text.length();
+                    textComplete = true;
+                } else {
+                    index++;
+                }
             } else {
-                index++;
+                Sprite.drawArray(g, font, "Press Z to read message", new Vector2d(xStart, 400), 32, 32, 24, 0);
+                Sprite.drawArray(g, font, "Hold X when not moving and move in a direction to run", new Vector2d(xStart, 450), 32, 32, 24, 0);
+                Sprite.drawArray(g, font, "Press Enter to pause", new Vector2d(xStart, 550), 32, 32, 24, 0);
+                Sprite.drawArray(g, font, "Press X to unpause game", new Vector2d(xStart, 600), 32, 32, 24, 0);
             }
-        } else {
-            Sprite.drawArray(g, font, "Press Z to read message", new Vector2d(xStart, 400), 32, 32, 24, 0);
-            Sprite.drawArray(g, font, "Hold X when not moving and move in a direction to run", new Vector2d(xStart, 450), 32, 32, 24, 0);
-            Sprite.drawArray(g, font, "Press Enter to pause", new Vector2d(xStart, 550), 32, 32, 24, 0);
-            Sprite.drawArray(g, font, "Press X to unpause game", new Vector2d(xStart, 600), 32, 32, 24, 0);
         }
     }
 }

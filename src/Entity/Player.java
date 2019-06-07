@@ -5,9 +5,13 @@
  */
 package Entity;
 
+import GameState.GameStateManager;
+import static GameState.GameStateManager.BATTLESTATE;
 import GameState.PlayState;
-import static GameState.PlayState.*;
 import Graphics.Sprite;
+import Pokemon.Pokeballs;
+import static Pokemon.Pokedex.pokedex;
+import Pokemon.Potions;
 import Utility.KeyHandler;
 import Utility.Vector2d;
 import java.awt.Graphics2D;
@@ -22,18 +26,39 @@ public class Player extends Entity {
     private boolean pause, back;
     private Image renderImage;
 
+    private GameStateManager gsm;
     private final int OPENBAG = 0;
     private final int CLOSEBAG = 1;
+    public int bagSize;
 
-    public Player(Sprite sprite, Vector2d origin, int size) {
+    public Player(Sprite sprite, Vector2d origin, int size, GameStateManager gs) {
         super(sprite, origin, size);
+        gsm = gs;
+        this.addPokemon(pokedex.get(0));
+        this.addBagItem(new Pokeballs("Ultra Ball"));
+        this.addBagItem(new Potions("Hyper Potion"));
+        this.addBagItem(new Pokeballs("Master Ball"));
+        this.addBagItem(new Potions("Full Restore"));
+        this.addBagItem(new Pokeballs("Ultra Ball"));
+        this.addBagItem(new Potions("Hyper Potion"));
+        this.addBagItem(new Pokeballs("Master Ball"));
+        this.addBagItem(new Potions("Full Restore"));
+        this.addBagItem(new Pokeballs("Ultra Ball"));
+        this.addBagItem(new Potions("Hyper Potion"));
+        this.addBagItem(new Pokeballs("Master Ball"));
+        this.addBagItem(new Potions("Full Restore"));
+        this.addBagItem(new Pokeballs("Ultra Ball"));
+        this.addBagItem(new Potions("Hyper Potion"));
+        this.addBagItem(new Pokeballs("Master Ball"));
+        this.addBagItem(new Potions("Full Restore"));
+        bagSize = playerBag.size() - 1;
     }
 
     public void move() {
-        if(sprint){
+        if (sprint) {
             sprite = runSprite;
         }
-        
+
         if (up) {
             dy -= moveSpeed;
         } else {
@@ -90,14 +115,16 @@ public class Player extends Entity {
         if (interact && PlayState.loadText == false) {
             PlayState.index = 0;
             PlayState.text = "Hello and welcome to the world of pokekaune. Maps and Pokemon will be added soon.";
+            PlayState.textComplete = false;
             PlayState.loadText = true;
             interact = false;
         }
 
         if (back && PlayState.textComplete == true && !pause) {
             PlayState.loadText = false;
+            interact = false;
             back = false;
-        }else if (back && PlayState.textComplete == false && !pause){
+        } else if (back && PlayState.textComplete == false && !pause) {
             back = false;
         }
 
@@ -152,10 +179,10 @@ public class Player extends Entity {
 
         if (key.A.clicked && !pause) {
             interact = true;
-        }else{
-            
+            PlayState.pause = true;
+            gsm.add(BATTLESTATE);
         }
-        
+
         if (key.menu.clicked) {
             openBag = true;
         }
@@ -167,8 +194,8 @@ public class Player extends Entity {
         if (key.B.down && !sprint) {
             sprint = true;
         }
-        
-        if(!key.B.down && sprint){
+
+        if (!key.B.down && sprint) {
             sprint = false;
             sprite = walkSprite;
         }
