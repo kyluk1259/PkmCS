@@ -29,11 +29,13 @@ public class Player extends Entity {
     private GameStateManager gsm;
     private final int OPENBAG = 0;
     private final int CLOSEBAG = 1;
-    public int bagSize;
+    public int bagSize, pokemonCount;
 
     public Player(Sprite sprite, Vector2d origin, int size, GameStateManager gs) {
         super(sprite, origin, size);
         gsm = gs;
+        this.addPokemon(pokedex.get(0));
+        this.addPokemon(pokedex.get(0));
         this.addPokemon(pokedex.get(0));
         this.addBagItem(new Pokeballs("Ultra Ball"));
         this.addBagItem(new Potions("Hyper Potion"));
@@ -52,6 +54,8 @@ public class Player extends Entity {
         this.addBagItem(new Pokeballs("Master Ball"));
         this.addBagItem(new Potions("Full Restore"));
         bagSize = playerBag.size() - 1;
+        pokemonCount = pokemon.size() - 1;
+                
     }
 
     public void move() {

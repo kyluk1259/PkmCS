@@ -28,7 +28,7 @@ public class BattleState extends GameState {
 
     private boolean isStarted, loadBattle, interact, inMenu, displayingText, fightMenu, pokemonMenu, bagMenu;
     private Background battleBackground, currentBackground;
-    private int color, count, index, scale, textChoice, flash, bagItem, x, y;
+    private int color, count, index, scale, textChoice, flash, bagItem, x, y, pokemonCount;
     private int[][] currentSelection = new int[2][2];
     private final int BATTLE = 0;
     private final int PLAYER = 1;
@@ -64,6 +64,7 @@ public class BattleState extends GameState {
         currentSelection[1][0] = 1;
         currentSelection[0][1] = 2;
         currentSelection[1][1] = 3;
+        pokemonCount = 0;
 
         battleBackground = new Background("Backgrounds/battlescenes.png", 257, 145, 1, 147);
         currentBackground = battleBackground;
@@ -204,6 +205,28 @@ public class BattleState extends GameState {
                 } else {
                     bagItem += 1;
                     System.out.println(bagItem);
+                }
+                key.down.clicked = false;
+            }
+        }
+
+        if (pokemonMenu) {
+            if (key.up.clicked) {
+                if (pokemonCount - 1 < 0) {
+                    pokemonCount = player.pokemonCount;
+                } else {
+                    pokemonCount -= 1;
+                    System.out.println(pokemonCount);
+                }
+                key.up.clicked = false;
+            }
+
+            if (key.down.clicked) {
+                if (pokemonCount + 1 > player.pokemonCount) {
+                    pokemonCount = 0;
+                } else {
+                    pokemonCount += 1;
+                    System.out.println(pokemonCount);
                 }
                 key.down.clicked = false;
             }
@@ -401,23 +424,37 @@ public class BattleState extends GameState {
             g.drawLine(540, 530, 540 + player.getBagItem(bagItem).getName().length() * 19, 530);
         }
     }
-    
-    public void pokemonBox (Graphics2D g){
-         g.setColor(Color.black);
+
+    public void pokemonBox(Graphics2D g) {
+
+        g.setColor(Color.black);
         g.drawLine(300, 480, 300, 640);
-        Sprite.drawArray(g, font, player.getPokemon(0).getName(), new Vector2d(150, 520), 24, 24, 20, 0);
-        Sprite.drawArray(g, font, "Lvl: " + player.getPokemon(0).getLvl(), new Vector2d(30, 520), 20, 20, 20, 0);
-        if (bagItem + 1 <= player.bagSize) {
-            Sprite.drawArray(g, font, player.getBagItem(bagItem + 1).getName(), new Vector2d(540, 535), 24, 24, 20, 0);
-        }
-        if (bagItem + 2 <= player.bagSize) {
-            Sprite.drawArray(g, font, player.getBagItem(bagItem + 2).getName(), new Vector2d(540, 565), 24, 24, 20, 0);
-        }
-        if (bagItem + 3 <= player.bagSize) {
-            Sprite.drawArray(g, font, player.getBagItem(bagItem + 3).getName(), new Vector2d(540, 595), 24, 24, 20, 0);
-        }
         if (flash != 0 && flash != 1) {
-            g.drawLine(540, 530, 540 + player.getBagItem(bagItem).getName().length() * 19, 530);
+            if (pokemonCount == 0) {
+                Sprite.drawArray(g, font, player.getPokemon(0).getName(), new Vector2d(150, 515), 24, 24, 20, 0);
+                Sprite.drawArray(g, font, "Lvl: " + player.getPokemon(0).getLvl(), new Vector2d(20, 520), 20, 20, 20, 0);
+            } else {
+                Sprite.drawArray(g, font, player.getPokemon(pokemonCount).getName(), new Vector2d(540, 535 + (20 * pokemonCount - 1)), 24, 24, 20, 0);
+            }
+        }
+        if (player.pokemonCount >= 0 && pokemonCount != 0) {
+            Sprite.drawArray(g, font, player.getPokemon(0).getName(), new Vector2d(150, 515), 24, 24, 20, 0);
+            Sprite.drawArray(g, font, "Lvl: " + player.getPokemon(0).getLvl(), new Vector2d(20, 520), 20, 20, 20, 0);
+        }
+        if (player.pokemonCount >= 1 && pokemonCount != 1) {
+            Sprite.drawArray(g, font, player.getPokemon(1).getName(), new Vector2d(540, 535), 24, 24, 20, 0);
+        }
+        if (player.pokemonCount >= 2 && pokemonCount != 2) {
+            Sprite.drawArray(g, font, player.getPokemon(2).getName(), new Vector2d(540, 555), 24, 24, 20, 0);
+        }
+        if (player.pokemonCount >= 3 && pokemonCount != 3) {
+            Sprite.drawArray(g, font, player.getPokemon(3).getName(), new Vector2d(540, 575), 24, 24, 20, 0);
+        }
+        if (player.pokemonCount >= 4 && pokemonCount != 4) {
+            Sprite.drawArray(g, font, player.getPokemon(4).getName(), new Vector2d(540, 595), 24, 24, 20, 0);
+        }
+        if (player.pokemonCount >= 5 && pokemonCount != 5) {
+            Sprite.drawArray(g, font, player.getPokemon(5).getName(), new Vector2d(540, 615), 24, 24, 20, 0);
         }
     }
 }
