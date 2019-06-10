@@ -44,7 +44,6 @@ public class KeyHandler implements KeyListener {
                     TimeUnit.MILLISECONDS.sleep(65);
                     clicked = false;
                 } catch (InterruptedException e) {
-
                 }
             } else {
                 releaseClicked();

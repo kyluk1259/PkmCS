@@ -406,7 +406,7 @@ public class BattleState extends GameState {
          g.setColor(Color.black);
         g.drawLine(300, 480, 300, 640);
         Sprite.drawArray(g, font, player.getPokemon(0).getName(), new Vector2d(150, 520), 24, 24, 20, 0);
-        Sprite.drawArray(g, font, "Lvl: " + player.getPokemon(0).getLvl(), new Vector2d(30, 520), 20, 20, 16, 0);
+        Sprite.drawArray(g, font, "Lvl: " + player.getPokemon(0).getLvl(), new Vector2d(30, 520), 20, 20, 20, 0);
         if (bagItem + 1 <= player.bagSize) {
             Sprite.drawArray(g, font, player.getBagItem(bagItem + 1).getName(), new Vector2d(540, 535), 24, 24, 20, 0);
         }

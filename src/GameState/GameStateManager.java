@@ -33,7 +33,7 @@ public class GameStateManager {
         
         states = new ArrayList<GameState>();
         
-        states.add(new MenuState(this));
+        states.add(new StartState(this));
     }
     
     public void pop(int state){
